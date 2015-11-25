@@ -1,4 +1,6 @@
 
+require 'pry'
+
 class Bankroll
 attr_accessor :begining, :spent, :won
 
@@ -14,6 +16,7 @@ def bankroll_counter
   puts "Your bankroll is $#{@bankroll_tot}"
   if @bankroll_tot <= 0
     puts "This casino is not a credit institution. You loose!\nBetter luck next time!"
+    exit_now  
   end
 
 end
@@ -47,6 +50,7 @@ class Game
 
  def game_room_menu
    sleep 1
+   puts ""
    puts "What game would you like to play?\nType 1 for Slots, 2 for High-Low, 3 for checking your bankroll, 4 to quit."
    input = gets.strip.to_i
    case input
@@ -97,7 +101,7 @@ class Game
   puts "Press 'Enter' to pull the slot. It is $50."
   gets
 
-  @bankroll.spent = 50
+  @bankroll.begining -= 50
   symbols = ['^_^', '$', '<3']
   slot_one = symbols.sample(1)
   slot_two = symbols.sample(1)
@@ -111,7 +115,7 @@ class Game
   if slot_one == slot_two && slot_one == slot_three
     puts "You win the Jackpot!!!!!!!!!"
     puts ""
-    @bankroll.won = 1000
+    @bankroll.begining += 1000
     slots
   else 
     puts "Oh man! Try again soon!"
